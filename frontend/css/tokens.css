@@ -1,0 +1,70 @@
+:root {
+  color-scheme: dark;
+
+  /* Type */
+  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.9375rem;
+  --text-md: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.875rem;
+  --text-3xl: 2.375rem;
+
+  /* Space */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* Warm graphite neutrals */
+  --bg: oklch(0.155 0.008 75);
+  --bg-elevated: oklch(0.185 0.009 75);
+  --surface: oklch(0.215 0.010 75);
+  --surface-2: oklch(0.255 0.011 75);
+  --line: oklch(0.315 0.010 75);
+  --line-strong: oklch(0.405 0.012 75);
+
+  --ink: oklch(0.945 0.006 75);
+  --ink-soft: oklch(0.790 0.008 75);
+  --ink-muted: oklch(0.635 0.010 75);
+  --ink-faint: oklch(0.500 0.010 75);
+
+  /* Signals */
+  --signal: oklch(0.82 0.155 82);
+  --signal-bright: oklch(0.88 0.160 85);
+  --signal-ink: oklch(0.210 0.030 82);
+  --success: oklch(0.76 0.125 152);
+  --danger: oklch(0.68 0.185 28);
+  --warning: oklch(0.79 0.140 70);
+  --info: oklch(0.73 0.090 238);
+
+  --grid-line: oklch(0.55 0.010 75 / 0.07);
+
+  /* Shape */
+  --radius-xs: 4px;
+  --radius-sm: 7px;
+  --radius-md: 11px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-1: inset 0 1px 0 oklch(1 0 0 / 0.035), 0 16px 40px -24px oklch(0.03 0.01 75 / 0.9);
+  --shadow-2: 0 24px 60px -30px oklch(0.03 0.01 75 / 0.95);
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-1: 120ms;
+  --dur-2: 180ms;
+  --dur-3: 260ms;
+
+  /* Frame */
+  --topbar-h: 4.25rem;
+  --page-max: 90rem;
+}

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fleet Control · Patrol operations</title>
+    <meta name="description" content="Patrol operations console for security robots." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/tokens.css" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
+  </head>
+  <body data-page="overview">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" id="site-header"></header>
+
+    <main class="page" id="main">
+      <section class="page-head">
+        <p class="eyebrow">Patrol operations <span class="eyebrow__sep">/</span> Overview</p>
+        <div class="page-head__row">
+          <div>
+            <h1 class="page-title">The console is online.</h1>
+            <p class="page-lede">
+              This is the shell for Fleet Control: shared navigation, design tokens, and an honest
+              view of what is wired. Modules land sprint by sprint on top of a FastAPI + SQLite
+              base.
+            </p>
+          </div>
+          <div class="page-head__actions">
+            <a class="btn btn--primary" href="#modules">See what ships next</a>
+            <a class="btn btn--ghost" href="/robots.html">Fleet registry</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="overview-grid">
+        <section class="panel panel--steps" aria-labelledby="path-title">
+          <header class="panel__head">
+            <h2 class="panel__title" id="path-title">From shell to fleet</h2>
+            <span class="panel__meta mono">03 steps</span>
+          </header>
+          <ol class="steps">
+            <li class="step">
+              <span class="step__index mono" aria-hidden="true">01</span>
+              <div class="step__body">
+                <h3 class="step__title">
+                  Sign in with a role
+                  <span class="chip chip--queued">SCRUM-20</span>
+                </h3>
+                <p class="step__copy">
+                  Admins and operators authenticate with email and password. Every query is scoped
+                  to their company, and admin-only pages stay hidden for operators.
+                </p>
+              </div>
+              <span class="step__state">Next up</span>
+            </li>
+            <li class="step">
+              <span class="step__index mono" aria-hidden="true">02</span>
+              <div class="step__body">
+                <h3 class="step__title">
+                  Register a robot
+                  <span class="chip chip--queued">SCRUM-22</span>
+                </h3>
+                <p class="step__copy">
+                  Give a robot a name and a unique serial number, then copy its API key. The key is
+                  shown once and stored only as a hash.
+                </p>
+              </div>
+              <span class="step__state">Sprint 1</span>
+            </li>
+            <li class="step">
+              <span class="step__index mono" aria-hidden="true">03</span>
+              <div class="step__body">
+                <h3 class="step__title">
+                  Watch it move
+                  <span class="chip chip--queued">SCRUM-26</span>
+                </h3>
+                <p class="step__copy">
+                  Start the simulator and follow the robot on the live map. Position refreshes every
+                  five seconds; battery and status sit beside it.
+                </p>
+              </div>
+              <span class="step__state">Sprint 2</span>
+            </li>
+          </ol>
+        </section>
+
+        <aside class="panel panel--status" aria-labelledby="status-title">
+          <header class="panel__head">
+            <h2 class="panel__title" id="status-title">Build status</h2>
+            <span class="status-dot status-dot--live" aria-hidden="true"></span>
+          </header>
+          <dl class="status-list">
+            <div class="status-row">
+              <dt>Frontend shell</dt>
+              <dd><span class="chip chip--ready">Ready</span></dd>
+            </div>
+            <div class="status-row">
+              <dt>API surface</dt>
+              <dd><span class="chip chip--queued">Not wired</span></dd>
+            </div>
+            <div class="status-row">
+              <dt>Database</dt>
+              <dd><span class="chip chip--queued">Planned</span></dd>
+            </div>
+            <div class="status-row">
+              <dt>Telemetry</dt>
+              <dd><span class="chip chip--queued">Waiting</span></dd>
+            </div>
+          </dl>
+          <p class="panel__note">
+            SCRUM-21 wires the API, adds the first tables, and turns the health check green.
+          </p>
+        </aside>
+      </div>
+
+      <section class="section" id="modules" aria-labelledby="modules-title">
+        <header class="section-head">
+          <h2 class="section-title" id="modules-title">Module map</h2>
+          <p class="section-note">
+            Sprint order from the specification book. Nothing is hidden behind a fake data layer.
+          </p>
+        </header>
+        <div class="table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Module</th>
+                <th scope="col">Issue</th>
+                <th scope="col">Sprint</th>
+                <th scope="col">State</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><a class="table-link" href="/robots.html">Fleet registry</a></td>
+                <td class="mono">SCRUM-22 / 23</td>
+                <td>Sprint 1</td>
+                <td><span class="chip chip--queued">Queued</span></td>
+              </tr>
+              <tr>
+                <td><a class="table-link" href="/map.html">Live map</a></td>
+                <td class="mono">SCRUM-26</td>
+                <td>Sprint 2</td>
+                <td><span class="chip chip--queued">Queued</span></td>
+              </tr>
+              <tr>
+                <td><a class="table-link" href="/missions.html">Patrol missions</a></td>
+                <td class="mono">SCRUM-28 / 29</td>
+                <td>Sprint 3</td>
+                <td><span class="chip chip--queued">Queued</span></td>
+              </tr>
+              <tr>
+                <td><a class="table-link" href="/alerts.html">Alerts</a></td>
+                <td class="mono">SCRUM-30 / 31</td>
+                <td>Sprint 3</td>
+                <td><span class="chip chip--queued">Queued</span></td>
+              </tr>
+              <tr>
+                <td><a class="table-link" href="/analytics.html">Analytics</a></td>
+                <td class="mono">SCRUM-32 / 33</td>
+                <td>Sprint 3 to 4</td>
+                <td><span class="chip chip--queued">Queued</span></td>
+              </tr>
+              <tr>
+                <td><a class="table-link" href="/predictions.html">Risk forecast</a></td>
+                <td class="mono">SCRUM-35 to 37</td>
+                <td>Sprint 4</td>
+                <td><span class="chip chip--queued">Queued</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="/js/layout.js" defer></script>
+  </body>
+</html>

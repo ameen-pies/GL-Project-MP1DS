@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.pytest_cache/
+*.db
+*.db-journal
+*.sqlite3
+
+# Node (not used by the current frontend)
+node_modules/
+npm-debug.log*
+
+# ML artifacts
+ml/data/
+ml/models/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
