@@ -50,10 +50,10 @@
             </div>
             <p class="hero__meta">
               <span class="hero__meta-item">FastAPI + SQLite</span>
-              <span class="hero__meta-item">Shell 0.1</span>
+              <span class="hero__meta-item">Shell 1.0</span>
               <span class="hero__meta-item">
-                <span class="status-dot status-dot--off" aria-hidden="true"></span>
-                No telemetry connected
+                <span class="status-dot status-dot--live" aria-hidden="true"></span>
+                Live telemetry
               </span>
             </p>
           </div>
@@ -161,7 +161,7 @@
                 />
               </svg>
               <span class="map-card__label">
-                <span class="status-dot status-dot--off" aria-hidden="true"></span>
+                <span class="status-dot status-dot--live" aria-hidden="true"></span>
                 Sector 4
               </span>
               <span class="map-card__marker" style="--x: 24%; --y: 38%"></span>
@@ -171,8 +171,8 @@
               <span class="map-card__bubble">Built for the night shift!</span>
               <span class="badge badge--light map-card__tag">Autonomous</span>
               <div class="map-card__status">
-                <strong>3 units</strong>
-                <span>All queued · no live feed</span>
+                <strong>Sample fleet</strong>
+                <span>Illustration · not live data</span>
               </div>
             </div>
           </div>
@@ -184,24 +184,24 @@
             </svg>
             <h2 id="intro-title">A control room should be <em>honest</em> before it is impressive.</h2>
             <p>
-              If the map has no robots, the map should say so. This build is the
-              shell: one design system, shared navigation, and an honest account
-              of what is wired.
+              If the map has no robots, the map says so. If a unit has not sent
+              a sample in a minute, it reads offline. Empty states are part of
+              the product, not an afterthought.
             </p>
             <p>
-              Every module below ships in sprint order. No fake telemetry, no
-              placeholder charts pretending to be live.
+              Six modules, four sprints, one vocabulary. Every number below comes
+              from the API — nothing is decorated to look busier than it is.
             </p>
             <div class="intro__status">
-              <span class="chip chip--ready"><span class="status-dot status-dot--live" aria-hidden="true"></span>Frontend ready</span>
-              <span class="chip chip--queued">API not wired</span>
-              <span class="chip chip--queued">Database planned</span>
-              <span class="chip chip--queued">Telemetry waiting</span>
+              <span class="chip chip--ready"><span class="status-dot status-dot--live" aria-hidden="true"></span>Fleet live</span>
+              <span class="chip chip--ready">API wired</span>
+              <span class="chip chip--ready">Database ready</span>
+              <span class="chip chip--ready">Telemetry polling</span>
             </div>
             <p class="intro__next">
-              Next up
+              All sprints shipped
               <span class="eyebrow__sep">/</span>
-              SCRUM-21 wires the API, adds the first tables, and turns the health check green.
+              Log in, register a robot, run the simulator, and the whole desk comes alive.
             </p>
           </div>
         </div>
@@ -222,8 +222,8 @@
               <h3>Sign in with a role</h3>
               <p>Admins and operators authenticate with email and password. Every query stays scoped to their company.</p>
               <div class="path__meta">
-                <span class="chip chip--queued">SCRUM-20</span>
-                <span class="path__state">Next up</span>
+                <span class="chip chip--ready">SCRUM-20</span>
+                <span class="path__state">Shipped</span>
               </div>
             </article>
             <article class="path__item">
@@ -231,8 +231,8 @@
               <h3>Register a robot</h3>
               <p>Give a robot a name and a unique serial number, then copy its API key once. The key is stored only as a hash.</p>
               <div class="path__meta">
-                <span class="chip chip--queued">SCRUM-22</span>
-                <span class="path__state">Sprint 1</span>
+                <span class="chip chip--ready">SCRUM-22</span>
+                <span class="path__state">Shipped</span>
               </div>
             </article>
             <article class="path__item">
@@ -240,8 +240,8 @@
               <h3>Watch it move</h3>
               <p>Start the simulator and follow the robot on the map. Position refreshes every five seconds; battery sits beside it.</p>
               <div class="path__meta">
-                <span class="chip chip--queued">SCRUM-26</span>
-                <span class="path__state">Sprint 2</span>
+                <span class="chip chip--ready">SCRUM-26</span>
+                <span class="path__state">Shipped</span>
               </div>
             </article>
           </div>
@@ -278,6 +278,7 @@
 
     <footer class="site-footer" id="site-footer"></footer>
 
+    <script src="/js/api.js" defer></script>
     <script src="/js/layout.js" defer></script>
     <script src="/js/pages.js" defer></script>
   </body>

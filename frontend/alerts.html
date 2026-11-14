@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Alerts · Fleet Control</title>
-    <meta name="description" content="Alerts module, queued for Sprint 3." />
+    <meta name="description" content="Intrusion and obstacle alerts from your robots, with acknowledgement." />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,13 +15,15 @@
     <link rel="stylesheet" href="/css/tokens.css" />
     <link rel="stylesheet" href="/css/base.css" />
     <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/app.css" />
   </head>
-  <body data-page="alerts">
+  <body data-page="alerts" data-auth="required">
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header" id="site-header"></header>
     <main class="page" id="main"></main>
     <footer class="site-footer" id="site-footer"></footer>
+    <script src="/js/api.js" defer></script>
     <script src="/js/layout.js" defer></script>
-    <script src="/js/pages.js" defer></script>
+    <script src="/js/alerts.js" defer></script>
   </body>
 </html>

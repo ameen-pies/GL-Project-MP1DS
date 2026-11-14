@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Log in · Fleet Control</title>
+    <meta name="description" content="Log in to the Fleet Control patrol operations console." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..900,0..100,0..1;1,9..144,400..900,0..100,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/tokens.css" />
+    <link rel="stylesheet" href="/css/base.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body data-page="login" data-shell="minimal">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" id="site-header"></header>
+
+    <main class="page" id="main">
+      <div class="login">
+        <div class="login__intro">
+          <p class="eyebrow">Patrol operations <span class="eyebrow__sep">/</span> Access</p>
+          <h1>Sign in to the <em>desk</em>.</h1>
+          <p>
+            One company, one quiet console. Your account decides which robots,
+            missions, and alerts you can see — and nothing outside your company
+            is ever loaded.
+          </p>
+          <p class="login__accounts">
+            <span><strong>admin@demo.tn</strong> · admin</span>
+            <span><strong>operator@demo.tn</strong> · operator</span>
+            <span>Passwords come from the seed script (<span class="mono">SEED_*_PASSWORD</span>).</span>
+          </p>
+        </div>
+
+        <section class="login__card" aria-labelledby="login-title">
+          <span class="login__sticker">
+            <span class="status-dot status-dot--live" aria-hidden="true"></span>
+            JWT · 60 min
+          </span>
+          <h2 id="login-title">Log in</h2>
+          <p>Use your company email and password.</p>
+
+          <div id="login-notice"></div>
+
+          <form class="login__form" id="login-form" novalidate>
+            <div class="field">
+              <label for="email">Email</label>
+              <input
+                class="input"
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+                placeholder="operator@demo.tn"
+              />
+            </div>
+            <div class="field">
+              <label for="password">Password</label>
+              <input
+                class="input"
+                id="password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                required
+                placeholder="••••••••"
+              />
+            </div>
+            <button class="btn btn--dark" type="submit" id="login-submit">Log in</button>
+          </form>
+        </section>
+      </div>
+    </main>
+
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="/js/api.js" defer></script>
+    <script src="/js/layout.js" defer></script>
+    <script src="/js/login.js" defer></script>
+  </body>
+</html>
