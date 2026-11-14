@@ -1,4 +1,4 @@
-/* Shared application shell: window chrome, masthead, capsule nav, clock, footer. */
+/* Shared shell: header navigation, UTC clocks, and footer. */
 
 (() => {
   const NAV_ITEMS = [
@@ -11,155 +11,12 @@
     { href: "/predictions.html", label: "Risk", page: "predictions" },
   ];
 
-  /* 12 x 12 pixel maps. # = ink, y = yellow, w = paper, . = empty. */
-  const ICONS = {
-    robot: [
-      "............",
-      "...#....#...",
-      "...#....#...",
-      "..########..",
-      ".##########.",
-      ".###ww##ww#.",
-      ".###yyyy###.",
-      "..########..",
-      ".##########.",
-      ".###.yy.###.",
-      ".##########.",
-      "..##....##..",
-    ],
-    pin: [
-      "............",
-      "....####....",
-      "..########..",
-      ".##########.",
-      ".###wwww###.",
-      ".###wwww###.",
-      ".##########.",
-      "..########..",
-      "...######...",
-      "....####....",
-      ".....##.....",
-      "............",
-    ],
-    flag: [
-      "............",
-      "..#.........",
-      "..#yyyyyy...",
-      "..#yyyyyyy..",
-      "..#yyyyyy...",
-      "..#.........",
-      "..#.........",
-      "..#.........",
-      "..#.........",
-      "..#.........",
-      "..#.........",
-      ".#####......",
-    ],
-    bell: [
-      ".....##.....",
-      "....####....",
-      "...######...",
-      "...######...",
-      "..########..",
-      "..########..",
-      ".##########.",
-      ".##########.",
-      "############",
-      "............",
-      ".....##.....",
-      "............",
-    ],
-    chart: [
-      "............",
-      "............",
-      ".....yy.....",
-      ".....yy.....",
-      ".....yy.....",
-      ".##..yy.....",
-      ".##..yy.....",
-      ".##..yy..##.",
-      ".##..yy..##.",
-      ".##..yy..##.",
-      "############",
-      "............",
-    ],
-    bolt: [
-      "....###.....",
-      "...###......",
-      "..###.......",
-      ".###........",
-      "########....",
-      "....###.....",
-      "...###......",
-      "..###.......",
-      ".###........",
-      "###.........",
-      "............",
-      "............",
-    ],
-    star: [
-      ".....##.....",
-      ".....##.....",
-      "....####....",
-      "..########..",
-      "############",
-      ".##########.",
-      "..########..",
-      "..########..",
-      "..###..###..",
-      ".###....###.",
-      ".##......##.",
-      "............",
-    ],
-    battery: [
-      "............",
-      "............",
-      "#########...",
-      "#yyyyyyy#...",
-      "#yyyyyyy#...",
-      "#yyyyyyy#.##",
-      "#yyyyyyy#.##",
-      "#yyyyyyy#...",
-      "#########...",
-      "............",
-      "............",
-      "............",
-    ],
-    floppy: [
-      "############",
-      "#wwwww##www#",
-      "#wwwww##www#",
-      "#wwwww##www#",
-      "############",
-      "#wwwwwwwwww#",
-      "#wwwwwwwwww#",
-      "#wwwwwwwwww#",
-      "#wwwwwwwwww#",
-      "#wwwwwwwwww#",
-      "#wwwwwwwwww#",
-      "############",
-    ],
-  };
-
-  function iconSVG(name, className = "pixel-icon") {
-    const rows = ICONS[name] || ICONS.robot;
-    const rects = [];
-
-    rows.forEach((row, y) => {
-      [...row].forEach((cell, x) => {
-        if (cell === ".") return;
-        const fill = cell === "y" ? "var(--yellow)" : cell === "w" ? "#ffffff" : "currentColor";
-        rects.push(`<rect x="${x}" y="${y}" width="1" height="1" fill="${fill}" />`);
-      });
-    });
-
-    return `<svg class="${className}" viewBox="0 0 12 12" aria-hidden="true" focusable="false" shape-rendering="crispEdges">${rects.join("")}</svg>`;
-  }
-
-  window.FleetIcons = { svg: iconSVG };
-
   function isActive(page) {
     return document.body.dataset.page === page;
+  }
+
+  function brandHTML() {
+    return `<a class="brand" href="/"><span class="brand__mark" aria-hidden="true"></span>Fleet Control</a>`;
   }
 
   function headerHTML() {
@@ -168,70 +25,70 @@
       return `<a class="nav__link" href="${item.href}"${current}>${item.label}</a>`;
     }).join("");
 
-    const date = new Intl.DateTimeFormat("en-GB", {
-      timeZone: "UTC",
-      weekday: "short",
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    })
-      .format(new Date())
-      .replace(/,/g, "")
-      .toUpperCase();
-
     return `
-      <div class="topbar">
-        <span class="topbar__label">
-          <span class="topbar__date">${date}</span>
-          <span class="topbar__sep" aria-hidden="true">/</span>
-          <span class="topbar__section">Patrol operations console</span>
-        </span>
-        <div class="topbar__meta">
-          <span class="window-clock mono">
-            <span class="window-clock__label">UTC</span>
+      <div class="header__inner">
+        ${brandHTML()}
+        <nav class="nav" aria-label="Primary">${links}</nav>
+        <div class="header__meta">
+          <span class="header__clock">
+            <span>UTC</span>
             <span data-clock>--:--:--</span>
           </span>
-          <span class="window-badge">Shell 0.1</span>
         </div>
-      </div>
-      <header class="masthead">
-        <div class="masthead__icons" aria-hidden="true">
-          ${iconSVG("robot", "masthead__icon masthead__icon--robot")}
-          ${iconSVG("battery", "masthead__icon masthead__icon--battery")}
-          ${iconSVG("pin", "masthead__icon masthead__icon--pin")}
-          ${iconSVG("floppy", "masthead__icon masthead__icon--floppy")}
-          ${iconSVG("star", "masthead__icon masthead__icon--star")}
-        </div>
-        <a class="wordmark" href="/" aria-label="Fleet Control home">Fleet Control</a>
-        <p class="masthead__sub">
-          Patrol robot supervision
-          <span class="masthead__dot">\u00b7</span>
-          Practice build
-        </p>
-        <nav class="nav" aria-label="Primary">${links}</nav>
-      </header>`;
+      </div>`;
   }
 
   function footerHTML() {
     return `
       <div class="footer__inner">
-        <p>
-          Fleet Control
-          <span class="footer__sep">/</span>
-          Practice build
-          <span class="footer__sep">/</span>
-          FastAPI + SQLite
-        </p>
-        <p class="footer__status">
-          <span class="status-dot status-dot--off" aria-hidden="true"></span>
-          No telemetry connected
-        </p>
+        <div class="footer__brand">
+          ${brandHTML()}
+          <p>
+            A supervision desk for security patrol robots. Built as a practice
+            project, one sprint at a time.
+          </p>
+        </div>
+        <nav class="footer__col" aria-label="Sections">
+          <h3>Sections</h3>
+          <ul>
+            <li><a href="/">Overview</a></li>
+            <li><a href="/robots.html">Fleet registry</a></li>
+            <li><a href="/map.html">Live map</a></li>
+            <li><a href="/missions.html">Patrol missions</a></li>
+          </ul>
+        </nav>
+        <nav class="footer__col" aria-label="More">
+          <h3>More</h3>
+          <ul>
+            <li><a href="/alerts.html">Alerts</a></li>
+            <li><a href="/analytics.html">Analytics</a></li>
+            <li><a href="/predictions.html">Risk forecast</a></li>
+            <li><a href="/#modules">Module map</a></li>
+          </ul>
+        </nav>
+        <div class="footer__col">
+          <h3>Build</h3>
+          <ul>
+            <li>FastAPI + SQLite</li>
+            <li>Shell 0.1</li>
+            <li>6 modules queued</li>
+          </ul>
+          <p class="footer__status">
+            <span class="status-dot status-dot--off" aria-hidden="true"></span>
+            No telemetry connected
+          </p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>Fleet Control \u00b7 Practice build</p>
+        <p><span data-clock>--:--:--</span> UTC</p>
+        <a class="footer__top" href="#main">Back to top <span aria-hidden="true">\u2191</span></a>
       </div>`;
   }
 
   function startClock() {
-    const target = document.querySelector("[data-clock]");
-    if (!target) return;
+    const targets = [...document.querySelectorAll("[data-clock]")];
+    if (!targets.length) return;
 
     const formatter = new Intl.DateTimeFormat("en-GB", {
       timeZone: "UTC",
@@ -242,7 +99,10 @@
     });
 
     const tick = () => {
-      target.textContent = formatter.format(new Date());
+      const time = formatter.format(new Date());
+      targets.forEach((target) => {
+        target.textContent = time;
+      });
     };
 
     tick();

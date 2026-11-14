@@ -1,11 +1,13 @@
-/* Honest empty states for modules that land in later sprints. */
+/* Module catalogue and honest queued states for later sprints. */
 
 (() => {
-  const PAGES = {
+  const MODULES = {
     robots: {
+      num: "01",
       title: "Fleet registry",
-      eyebrow: "Module",
-      icon: "robot",
+      href: "/robots.html",
+      cover: "periwinkle",
+      label: "The registry",
       issue: "SCRUM-22 / 23",
       sprint: "Sprint 1",
       lede: "Register robots with a name and serial number, then search and scan the fleet at a glance.",
@@ -13,9 +15,11 @@
       unblocks: "Role-based login (SCRUM-20), so the registry can tell admins from operators.",
     },
     map: {
+      num: "02",
       title: "Live map",
-      eyebrow: "Module",
-      icon: "pin",
+      href: "/map.html",
+      cover: "ink",
+      label: "The map",
       issue: "SCRUM-26",
       sprint: "Sprint 2",
       lede: "One marker per robot on OpenStreetMap, refreshed every five seconds.",
@@ -23,9 +27,11 @@
       unblocks: "Telemetry ingestion (SCRUM-24 and SCRUM-25), so there is a position to draw.",
     },
     missions: {
+      num: "03",
       title: "Patrol missions",
-      eyebrow: "Module",
-      icon: "flag",
+      href: "/missions.html",
+      cover: "outline",
+      label: "The missions",
       issue: "SCRUM-28 / 29",
       sprint: "Sprint 3",
       lede: "Create a patrol from a seeded route, start it, and stop it.",
@@ -33,9 +39,11 @@
       unblocks: "The mission data model (SCRUM-28) and the robot mission endpoint in SCRUM-29.",
     },
     alerts: {
+      num: "04",
       title: "Alerts",
-      eyebrow: "Module",
-      icon: "bell",
+      href: "/alerts.html",
+      cover: "deep",
+      label: "The queue",
       issue: "SCRUM-30 / 31",
       sprint: "Sprint 3",
       lede: "Intrusion and obstacle events, queued for acknowledgement.",
@@ -43,9 +51,11 @@
       unblocks: "Telemetry auth (SCRUM-25) and the email service (SCRUM-30).",
     },
     analytics: {
+      num: "05",
       title: "Analytics",
-      eyebrow: "Module",
-      icon: "chart",
+      href: "/analytics.html",
+      cover: "ink",
+      label: "The numbers",
       issue: "SCRUM-32 / 33",
       sprint: "Sprint 3 to 4",
       lede: "Weekly patrol coverage, battery history, and uptime.",
@@ -53,9 +63,11 @@
       unblocks: "The statistics queries (SCRUM-32) and the weekly endpoint in SCRUM-33.",
     },
     predictions: {
+      num: "06",
       title: "Risk forecast",
-      eyebrow: "Module",
-      icon: "bolt",
+      href: "/predictions.html",
+      cover: "outline",
+      label: "The forecast",
       issue: "SCRUM-35 to 37",
       sprint: "Sprint 4",
       lede: "High-risk hours, learned from incidents.",
@@ -64,47 +76,129 @@
     },
   };
 
-  const page = PAGES[document.body.dataset.page];
+  window.FleetModules = MODULES;
+
+  function cardHTML(module) {
+    return `
+      <a class="fan__card" href="${module.href}">
+        <span class="module-card">
+          <span class="module-cover module-cover--${module.cover}">
+            <span class="module-cover__num">${module.num}</span>
+            <span class="module-cover__tag">${module.sprint}</span>
+          </span>
+          <span class="module-body">
+            <span class="module-body__title">${module.title}</span>
+            <span class="module-body__meta">${module.issue}</span>
+          </span>
+        </span>
+      </a>`;
+  }
+
+  function modulePageHTML(module, key) {
+    const keys = Object.keys(MODULES);
+    const index = keys.indexOf(key);
+    const prev = MODULES[keys[(index - 1 + keys.length) % keys.length]];
+    const next = MODULES[keys[(index + 1) % keys.length]];
+    return `
+      <div class="page__inner">
+        <article class="page-hero">
+          <div class="page-hero__copy">
+            <p class="eyebrow">
+              Module ${module.num}
+              <span class="eyebrow__sep">/</span>
+              Queued
+            </p>
+            <h1 class="page-hero__title">${module.title}</h1>
+            <p class="page-hero__lede">${module.lede}</p>
+            <div class="page-hero__actions">
+              <a class="btn btn--dark" href="/#modules">Back to modules</a>
+              <a class="btn btn--outline" href="/">Overview</a>
+            </div>
+            <div class="page-hero__meta">
+              <span class="chip chip--queued">${module.issue}</span>
+              <span class="chip">${module.sprint}</span>
+            </div>
+          </div>
+          <div class="page-cover page-cover--${module.cover}" aria-hidden="true">
+            <span class="page-cover__num">${module.num}</span>
+            <span class="page-cover__label">${module.label}</span>
+            <span class="badge badge--dark">Queued</span>
+          </div>
+        </article>
+
+        <section class="page-panel" aria-labelledby="panel-title">
+          <div class="page-panel__main">
+            <p class="eyebrow">In the build queue</p>
+            <h2 id="panel-title">What this module will do</h2>
+            <p>${module.body}</p>
+            <div class="page-panel__next">
+              <p class="eyebrow">Unblocks after</p>
+              <p>${module.unblocks}</p>
+            </div>
+          </div>
+          <aside class="page-panel__aside" aria-label="Module details">
+            <p class="eyebrow">At a glance</p>
+            <dl class="meta-list">
+              <div>
+                <dt>State</dt>
+                <dd><span class="chip chip--queued">Queued</span></dd>
+              </div>
+              <div>
+                <dt>Sprint</dt>
+                <dd>${module.sprint}</dd>
+              </div>
+              <div>
+                <dt>Issue</dt>
+                <dd class="mono">${module.issue}</dd>
+              </div>
+              <div>
+                <dt>Route</dt>
+                <dd class="mono">${module.href}</dd>
+              </div>
+            </dl>
+            <p class="page-panel__note">
+              The route is live now; the data is not. This page will change when
+              the module ships.
+            </p>
+          </aside>
+        </section>
+
+        <nav class="pager" aria-label="Module pages">
+          <a class="pager__link" href="${prev.href}">
+            <span class="pager__num" aria-hidden="true">${prev.num}</span>
+            <span class="pager__label">
+              <span>Previous</span>
+              <span class="pager__title">${prev.title}</span>
+            </span>
+          </a>
+          <a class="pager__link" href="${next.href}">
+            <span class="pager__label">
+              <span>Next</span>
+              <span class="pager__title">${next.title}</span>
+            </span>
+            <span class="pager__num" aria-hidden="true">${next.num}</span>
+          </a>
+        </nav>
+      </div>`;
+  }
+
+  const pageKey = document.body.dataset.page;
   const main = document.getElementById("main");
-  if (!page || !main) return;
+  if (!main) return;
 
-  document.title = `${page.title} \u00b7 Fleet Control`;
+  if (pageKey === "overview") {
+    const fan = document.getElementById("module-fan");
+    if (fan) {
+      fan.innerHTML = Object.values(MODULES)
+        .map((module) => cardHTML(module))
+        .join("");
+    }
+    return;
+  }
 
-  const icon = window.FleetIcons ? window.FleetIcons.svg(page.icon) : "";
+  const module = MODULES[pageKey];
+  if (!module) return;
 
-  main.innerHTML = `
-    <section class="page-head">
-      <p class="eyebrow">${page.eyebrow} <span class="eyebrow__sep">/</span> Queued</p>
-      <div class="page-head__row">
-        <div>
-          <h1 class="page-title">${page.title}</h1>
-          <p class="page-lede">${page.lede}</p>
-        </div>
-        <div class="page-head__actions">
-          <span class="chip chip--queued">${page.issue}</span>
-          <span class="module-card__sprint">${page.sprint}</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="module-card" aria-labelledby="module-title">
-      <div class="module-card__aside">
-        <div class="module-icon">${icon}</div>
-        <div class="module-card__flag">
-          <span class="chip chip--queued">Queued</span>
-        </div>
-      </div>
-      <div class="module-card__body">
-        <h2 id="module-title">In the build queue</h2>
-        <p>${page.body}</p>
-        <div class="module-card__next">
-          <p class="eyebrow">Unblocks after</p>
-          <p>${page.unblocks}</p>
-        </div>
-        <div class="module-card__actions">
-          <a class="btn btn--ghost" href="/">Back to overview</a>
-          <a class="btn btn--accent" href="/#modules">Module map</a>
-        </div>
-      </div>
-    </section>`;
+  document.title = `${module.title} \u00b7 Fleet Control`;
+  main.innerHTML = modulePageHTML(module, pageKey);
 })();

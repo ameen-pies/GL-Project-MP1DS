@@ -4,12 +4,15 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Fleet Control · Patrol operations</title>
-    <meta name="description" content="Patrol operations console for security robots." />
+    <meta
+      name="description"
+      content="A supervision desk for security patrol robots: fleet, live map, missions, alerts, analytics, and risk."
+    />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=Silkscreen:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..900,0..100,0..1;1,9..144,400..900,0..100,0..1&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/css/tokens.css" />
@@ -18,189 +21,264 @@
   </head>
   <body data-page="overview">
     <a class="skip-link" href="#main">Skip to content</a>
-    <div class="app">
-      <div class="site-header" id="site-header"></div>
+    <header class="site-header" id="site-header"></header>
 
-      <main class="page" id="main">
-        <section class="page-head">
-          <p class="eyebrow">Patrol operations <span class="eyebrow__sep">/</span> Overview</p>
-          <div class="page-head__row">
-            <div>
-              <h1 class="page-title">The console is online.</h1>
-              <p class="page-lede">
-                A supervision desk for security patrol robots. This first build is the shell:
-                shared navigation, one design system, and an honest account of what is wired.
-              </p>
+    <main class="page" id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__inner">
+          <div class="hero__type">
+            <p class="eyebrow hero__eyebrow">
+              Patrol operations
+              <span class="eyebrow__sep">/</span>
+              Practice build
+            </p>
+            <h1 class="hero__title" id="hero-title">
+              <span class="hero__line hero__line--sm">Hey, <em class="hero__outline">it's</em></span>
+              <span class="hero__line">Fleet</span>
+              <span class="hero__line">Control</span>
+            </h1>
+            <p class="hero__lede">
+              A supervision desk for security patrol robots. Live position, battery,
+              missions, and alerts — one screen, no noise.
+            </p>
+            <div class="hero__actions">
+              <a class="btn btn--dark" href="/robots.html">
+                Open the fleet
+                <span class="btn__arrow" aria-hidden="true">→</span>
+              </a>
+              <a class="btn btn--outline" href="#modules">See the modules</a>
             </div>
-            <div class="page-head__actions">
-              <a class="btn btn--primary" href="#modules">See what ships next</a>
-              <a class="btn btn--ghost" href="/robots.html">Fleet registry</a>
+            <p class="hero__meta">
+              <span class="hero__meta-item">FastAPI + SQLite</span>
+              <span class="hero__meta-item">Shell 0.1</span>
+              <span class="hero__meta-item">
+                <span class="status-dot status-dot--off" aria-hidden="true"></span>
+                No telemetry connected
+              </span>
+            </p>
+          </div>
+
+          <div class="hero__portrait">
+            <div class="portrait-card">
+              <span class="badge badge--dark portrait-card__badge">
+                <span class="status-dot" aria-hidden="true"></span>
+                Preview unit
+              </span>
+              <span class="portrait-card__sticker" aria-hidden="true">24/7</span>
+
+              <svg
+                class="portrait-card__art"
+                viewBox="0 0 320 380"
+                role="img"
+                aria-label="Illustration of a friendly patrol robot"
+              >
+                <ellipse cx="160" cy="352" rx="88" ry="12" fill="#17171c" opacity=".1" />
+                <path
+                  d="M44 262c16-86 70-146 158-160"
+                  fill="none"
+                  stroke="#8fa3f2"
+                  stroke-width="2"
+                  stroke-dasharray="5 9"
+                  stroke-linecap="round"
+                  opacity=".8"
+                />
+                <line x1="160" y1="70" x2="160" y2="44" stroke="#17171c" stroke-width="5" stroke-linecap="round" />
+                <circle cx="160" cy="34" r="9" fill="#5b74e0" stroke="#17171c" stroke-width="4" />
+                <rect x="84" y="98" width="18" height="34" rx="9" fill="#f2f5ff" stroke="#17171c" stroke-width="4" />
+                <rect x="218" y="98" width="18" height="34" rx="9" fill="#f2f5ff" stroke="#17171c" stroke-width="4" />
+                <rect x="98" y="62" width="124" height="96" rx="30" fill="#f2f5ff" stroke="#17171c" stroke-width="4" />
+                <rect x="116" y="82" width="88" height="46" rx="18" fill="#17171c" />
+                <circle cx="140" cy="105" r="7" fill="#8fa3f2" />
+                <circle cx="180" cy="105" r="7" fill="#8fa3f2" />
+                <rect x="148" y="136" width="24" height="6" rx="3" fill="#5b74e0" />
+                <rect x="92" y="170" width="136" height="124" rx="34" fill="#f2f5ff" stroke="#17171c" stroke-width="4" />
+                <circle cx="160" cy="224" r="27" fill="#e5eafa" stroke="#17171c" stroke-width="4" />
+                <text
+                  x="160"
+                  y="232"
+                  text-anchor="middle"
+                  font-family="DM Sans, sans-serif"
+                  font-size="18"
+                  font-weight="700"
+                  fill="#17171c"
+                >
+                  07
+                </text>
+                <rect x="56" y="184" width="28" height="82" rx="14" fill="#d5def9" stroke="#17171c" stroke-width="4" />
+                <rect x="236" y="184" width="28" height="82" rx="14" fill="#d5def9" stroke="#17171c" stroke-width="4" />
+                <rect x="104" y="294" width="112" height="28" rx="14" fill="#17171c" />
+                <circle cx="124" cy="322" r="14" fill="#17171c" />
+                <circle cx="196" cy="322" r="14" fill="#17171c" />
+                <circle cx="124" cy="322" r="5" fill="#8fa3f2" />
+                <circle cx="196" cy="322" r="5" fill="#8fa3f2" />
+              </svg>
+
+              <div class="portrait-card__info">
+                <div class="portrait-card__unit">
+                  <strong>Unit 07</strong>
+                  <span>Sector 4 · Sample data</span>
+                </div>
+                <div class="portrait-card__battery">
+                  <span>86%</span>
+                  <span class="battery-bar" aria-hidden="true"><i></i></span>
+                </div>
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <div class="overview-grid">
-          <section class="panel panel--steps" aria-labelledby="path-title">
-            <header class="panel__head">
-              <h2 class="panel__title" id="path-title">From shell to fleet</h2>
-              <span class="panel__meta">03 steps</span>
-            </header>
-            <ol class="steps">
-              <li class="step">
-                <span class="step__index" aria-hidden="true">01</span>
-                <div class="step__body">
-                  <h3 class="step__title">
-                    Sign in with a role
-                    <span class="chip chip--queued">SCRUM-20</span>
-                  </h3>
-                  <p class="step__copy">
-                    Admins and operators authenticate with email and password. Every query is
-                    scoped to their company, and admin-only pages stay hidden for operators.
-                  </p>
-                </div>
-                <span class="step__state">Next up</span>
-              </li>
-              <li class="step">
-                <span class="step__index" aria-hidden="true">02</span>
-                <div class="step__body">
-                  <h3 class="step__title">
-                    Register a robot
-                    <span class="chip chip--queued">SCRUM-22</span>
-                  </h3>
-                  <p class="step__copy">
-                    Give a robot a name and a unique serial number, then copy its API key. The key
-                    is shown once and stored only as a hash.
-                  </p>
-                </div>
-                <span class="step__state">Sprint 1</span>
-              </li>
-              <li class="step">
-                <span class="step__index" aria-hidden="true">03</span>
-                <div class="step__body">
-                  <h3 class="step__title">
-                    Watch it move
-                    <span class="chip chip--queued">SCRUM-26</span>
-                  </h3>
-                  <p class="step__copy">
-                    Start the simulator and follow the robot on the live map. Position refreshes
-                    every five seconds; battery and status sit beside it.
-                  </p>
-                </div>
-                <span class="step__state">Sprint 2</span>
-              </li>
-            </ol>
-          </section>
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker__track">
+          <span>· Fleet Control</span><span>· Patrol operations</span><span>· Live position</span>
+          <span>· Battery</span><span>· Missions</span><span>· Alerts</span>
+          <span>· Fleet Control</span><span>· Patrol operations</span><span>· Live position</span>
+          <span>· Battery</span><span>· Missions</span><span>· Alerts</span>
+        </div>
+      </div>
 
-          <aside class="panel panel--status" aria-labelledby="status-title">
-            <header class="panel__head">
-              <h2 class="panel__title" id="status-title">Build status</h2>
-              <span class="status-dot status-dot--live" aria-hidden="true"></span>
-            </header>
-            <dl class="status-list">
-              <div class="status-row">
-                <dt>Frontend shell</dt>
-                <dd><span class="chip chip--ready">Ready</span></dd>
+      <section class="intro" aria-labelledby="intro-title">
+        <div class="intro__inner">
+          <div class="intro__card">
+            <div class="map-card">
+              <svg class="map-card__route" viewBox="0 0 400 455" preserveAspectRatio="none" aria-hidden="true">
+                <path
+                  d="M18 372C88 334 62 236 146 214S244 262 330 168"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-dasharray="2 9"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M52 96c46 34 94 20 128 62"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-dasharray="2 10"
+                  stroke-linecap="round"
+                  opacity=".4"
+                />
+              </svg>
+              <span class="map-card__label">
+                <span class="status-dot status-dot--off" aria-hidden="true"></span>
+                Sector 4
+              </span>
+              <span class="map-card__marker" style="--x: 24%; --y: 38%"></span>
+              <span class="map-card__marker map-card__marker--muted" style="--x: 63%; --y: 30%"></span>
+              <span class="map-card__marker" style="--x: 47%; --y: 64%"></span>
+              <span class="map-card__marker map-card__marker--muted" style="--x: 78%; --y: 57%"></span>
+              <span class="map-card__bubble">Built for the night shift!</span>
+              <span class="badge badge--light map-card__tag">Autonomous</span>
+              <div class="map-card__status">
+                <strong>3 units</strong>
+                <span>All queued · no live feed</span>
               </div>
-              <div class="status-row">
-                <dt>API surface</dt>
-                <dd><span class="chip chip--queued">Not wired</span></dd>
-              </div>
-              <div class="status-row">
-                <dt>Database</dt>
-                <dd><span class="chip chip--queued">Planned</span></dd>
-              </div>
-              <div class="status-row">
-                <dt>Telemetry</dt>
-                <dd><span class="chip chip--queued">Waiting</span></dd>
-              </div>
-            </dl>
-            <p class="panel__note">
+            </div>
+          </div>
+
+          <div class="intro__copy">
+            <svg class="intro__arrow" viewBox="0 0 100 80" aria-hidden="true">
+              <path d="M8 70C18 34 44 14 86 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+              <path d="M74 11l13 7-9 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <h2 id="intro-title">A control room should be <em>honest</em> before it is impressive.</h2>
+            <p>
+              If the map has no robots, the map should say so. This build is the
+              shell: one design system, shared navigation, and an honest account
+              of what is wired.
+            </p>
+            <p>
+              Every module below ships in sprint order. No fake telemetry, no
+              placeholder charts pretending to be live.
+            </p>
+            <div class="intro__status">
+              <span class="chip chip--ready"><span class="status-dot status-dot--live" aria-hidden="true"></span>Frontend ready</span>
+              <span class="chip chip--queued">API not wired</span>
+              <span class="chip chip--queued">Database planned</span>
+              <span class="chip chip--queued">Telemetry waiting</span>
+            </div>
+            <p class="intro__next">
+              Next up
+              <span class="eyebrow__sep">/</span>
               SCRUM-21 wires the API, adds the first tables, and turns the health check green.
             </p>
-          </aside>
+          </div>
         </div>
+      </section>
 
-        <section class="section" id="modules" aria-labelledby="modules-title">
-          <header class="section-head">
-            <h2 class="section-title" id="modules-title">Module map</h2>
-            <p class="section-note">
-              Sprint order from the specification book. Nothing is hidden behind a fake data layer.
-            </p>
+      <section class="path" aria-labelledby="path-title">
+        <div class="path__inner">
+          <header class="path__head">
+            <div>
+              <p class="eyebrow">The plan</p>
+              <h2 class="path__title" id="path-title">From shell to fleet</h2>
+            </div>
+            <p class="path__note">Three steps to the first patrol. Everything before that is groundwork.</p>
           </header>
-          <div class="table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th scope="col">Module</th>
-                  <th scope="col">Issue</th>
-                  <th scope="col">Sprint</th>
-                  <th scope="col">State</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><a class="table-link" href="/robots.html">Fleet registry</a></td>
-                  <td class="mono">SCRUM-22 / 23</td>
-                  <td>Sprint 1</td>
-                  <td><span class="chip chip--queued">Queued</span></td>
-                </tr>
-                <tr>
-                  <td><a class="table-link" href="/map.html">Live map</a></td>
-                  <td class="mono">SCRUM-26</td>
-                  <td>Sprint 2</td>
-                  <td><span class="chip chip--queued">Queued</span></td>
-                </tr>
-                <tr>
-                  <td><a class="table-link" href="/missions.html">Patrol missions</a></td>
-                  <td class="mono">SCRUM-28 / 29</td>
-                  <td>Sprint 3</td>
-                  <td><span class="chip chip--queued">Queued</span></td>
-                </tr>
-                <tr>
-                  <td><a class="table-link" href="/alerts.html">Alerts</a></td>
-                  <td class="mono">SCRUM-30 / 31</td>
-                  <td>Sprint 3</td>
-                  <td><span class="chip chip--queued">Queued</span></td>
-                </tr>
-                <tr>
-                  <td><a class="table-link" href="/analytics.html">Analytics</a></td>
-                  <td class="mono">SCRUM-32 / 33</td>
-                  <td>Sprint 3 to 4</td>
-                  <td><span class="chip chip--queued">Queued</span></td>
-                </tr>
-                <tr>
-                  <td><a class="table-link" href="/predictions.html">Risk forecast</a></td>
-                  <td class="mono">SCRUM-35 to 37</td>
-                  <td>Sprint 4</td>
-                  <td><span class="chip chip--queued">Queued</span></td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="path__grid">
+            <article class="path__item">
+              <span class="path__num" aria-hidden="true">01</span>
+              <h3>Sign in with a role</h3>
+              <p>Admins and operators authenticate with email and password. Every query stays scoped to their company.</p>
+              <div class="path__meta">
+                <span class="chip chip--queued">SCRUM-20</span>
+                <span class="path__state">Next up</span>
+              </div>
+            </article>
+            <article class="path__item">
+              <span class="path__num" aria-hidden="true">02</span>
+              <h3>Register a robot</h3>
+              <p>Give a robot a name and a unique serial number, then copy its API key once. The key is stored only as a hash.</p>
+              <div class="path__meta">
+                <span class="chip chip--queued">SCRUM-22</span>
+                <span class="path__state">Sprint 1</span>
+              </div>
+            </article>
+            <article class="path__item">
+              <span class="path__num" aria-hidden="true">03</span>
+              <h3>Watch it move</h3>
+              <p>Start the simulator and follow the robot on the map. Position refreshes every five seconds; battery sits beside it.</p>
+              <div class="path__meta">
+                <span class="chip chip--queued">SCRUM-26</span>
+                <span class="path__state">Sprint 2</span>
+              </div>
+            </article>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="field-note" aria-labelledby="note-title">
+      <section class="cta" aria-labelledby="cta-title">
+        <h2 id="cta-title">Making every <em>patrol</em> count.</h2>
+        <p>
+          Six modules, one build order. Start with the registry, then the map,
+          then the missions that keep the night quiet.
+        </p>
+        <div class="cta__actions">
+          <a class="btn btn--outline" href="/robots.html">Open the fleet</a>
+          <a class="btn btn--ghost" href="#modules">See the module map</a>
+        </div>
+      </section>
+
+      <section class="works" id="modules" aria-labelledby="modules-title">
+        <div class="works__head">
           <div>
-            <h2 class="sr-only" id="note-title">Build note</h2>
-            <blockquote class="field-note__quote">
-              A control room should be honest before it is impressive. If the map has no robots,
-              the map should say so.
-            </blockquote>
-            <cite class="field-note__cite">Build note / Sprint 1</cite>
+            <p class="eyebrow">The build queue</p>
+            <h2 class="works__title" id="modules-title">My modules</h2>
           </div>
-          <div class="field-note__stamp" aria-hidden="true">
-            <svg class="pixel-icon" viewBox="0 0 12 12" focusable="false" shape-rendering="crispEdges">
-              <path
-                d="M5 0h2v2h2v2h3v3h-2v2H9v3H7v-2H5v2H3V9H2V7H0V4h3V2h2z"
-                fill="currentColor"
-              />
-            </svg>
-          </div>
-        </section>
-      </main>
+          <p class="works__note">
+            Six modules, one per sprint. Every card is a real route — nothing is
+            hidden behind a fake data layer.
+          </p>
+        </div>
+        <div class="fan" id="module-fan"></div>
+        <p class="fan__hint">Swipe to see all six modules <span aria-hidden="true">→</span></p>
+      </section>
+    </main>
 
-      <footer class="site-footer" id="site-footer"></footer>
-    </div>
+    <footer class="site-footer" id="site-footer"></footer>
+
     <script src="/js/layout.js" defer></script>
+    <script src="/js/pages.js" defer></script>
   </body>
 </html>

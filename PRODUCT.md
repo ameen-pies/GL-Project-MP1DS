@@ -18,7 +18,7 @@ Fleet Control supervises security patrol robots: live position, battery and stat
 
 ## Brand Personality
 
-Calm, precise, quietly playful. The voice is plain and operational: short labels, exact times, no hype. The surface borrows the warmth of a classic Mac desk — pale blue, pixel marks, capsule labels — but the nostalgia never slows the task. It should feel like a well-maintained control panel with a sense of craft, not a marketing dashboard.
+Calm, precise, quietly playful. The voice is plain and operational: short labels, exact times, no hype. The surface borrows the confidence of an editorial portfolio — white paper, periwinkle blocks, an oversized serif wordmark, a portrait card with stickers — but the playfulness never slows the task. It should feel like a well-made print dispatch sheet that happens to run a fleet, not a marketing dashboard.
 
 ## Anti-references
 
@@ -26,8 +26,8 @@ Calm, precise, quietly playful. The voice is plain and operational: short labels
 - Neon-on-black "cyber" security theater.
 - SaaS metric-card grids with giant gradient numbers.
 - Glassmorphism, decorative blurs, and ornamental motion.
-- Consumer-friendly rounded everything that hides operational density.
-- Retro pastiche that trades legibility for nostalgia: fake CRT filters, scanlines, and pixel type in body copy.
+- Consumer-friendly rounded everything that hides operational density, and retro pastiche that trades legibility for nostalgia: fake CRT filters, scanlines, and pixel type in body copy.
+- Portfolio pastiche that puts a giant portrait or an "About me" story ahead of the fleet data.
 
 ## Design Principles
 

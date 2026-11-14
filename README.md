@@ -48,11 +48,11 @@ frontend/
   alerts.html            Alerts (placeholder)
   analytics.html         Analytics (placeholder)
   predictions.html       Risk forecast (placeholder)
-  css/tokens.css         OKLCH color, type, spacing, motion tokens
-  css/base.css           Reset, buttons, chips, tables, forms
-  css/layout.css         App frame, navigation, page layout
+  css/tokens.css         Color, type, spacing, shape, motion tokens
+  css/base.css           Reset, buttons, chips, badges, tables, forms
+  css/layout.css         Editorial shell, hero, sections, module cards, footer
   js/layout.js           Shared header, navigation, UTC clock, footer
-  js/pages.js            Placeholder content per module
+  js/pages.js            Module catalogue, fan cards, module page template
 PRODUCT.md               Users, purpose, anti-references, principles
 DESIGN.md                Visual system and component rules
 ```
