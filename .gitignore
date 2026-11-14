@@ -17,6 +17,9 @@ npm-debug.log*
 ml/data/
 ml/models/
 
+# Local design references (not shipped)
+inspo design/
+
 # Editors and OS
 .vscode/
 .idea/

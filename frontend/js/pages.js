@@ -5,6 +5,7 @@
     robots: {
       title: "Fleet registry",
       eyebrow: "Module",
+      icon: "robot",
       issue: "SCRUM-22 / 23",
       sprint: "Sprint 1",
       lede: "Register robots with a name and serial number, then search and scan the fleet at a glance.",
@@ -14,6 +15,7 @@
     map: {
       title: "Live map",
       eyebrow: "Module",
+      icon: "pin",
       issue: "SCRUM-26",
       sprint: "Sprint 2",
       lede: "One marker per robot on OpenStreetMap, refreshed every five seconds.",
@@ -23,6 +25,7 @@
     missions: {
       title: "Patrol missions",
       eyebrow: "Module",
+      icon: "flag",
       issue: "SCRUM-28 / 29",
       sprint: "Sprint 3",
       lede: "Create a patrol from a seeded route, start it, and stop it.",
@@ -32,6 +35,7 @@
     alerts: {
       title: "Alerts",
       eyebrow: "Module",
+      icon: "bell",
       issue: "SCRUM-30 / 31",
       sprint: "Sprint 3",
       lede: "Intrusion and obstacle events, queued for acknowledgement.",
@@ -41,6 +45,7 @@
     analytics: {
       title: "Analytics",
       eyebrow: "Module",
+      icon: "chart",
       issue: "SCRUM-32 / 33",
       sprint: "Sprint 3 to 4",
       lede: "Weekly patrol coverage, battery history, and uptime.",
@@ -50,6 +55,7 @@
     predictions: {
       title: "Risk forecast",
       eyebrow: "Module",
+      icon: "bolt",
       issue: "SCRUM-35 to 37",
       sprint: "Sprint 4",
       lede: "High-risk hours, learned from incidents.",
@@ -62,7 +68,9 @@
   const main = document.getElementById("main");
   if (!page || !main) return;
 
-  document.title = `${page.title} · Fleet Control`;
+  document.title = `${page.title} \u00b7 Fleet Control`;
+
+  const icon = window.FleetIcons ? window.FleetIcons.svg(page.icon) : "";
 
   main.innerHTML = `
     <section class="page-head">
@@ -72,22 +80,31 @@
           <h1 class="page-title">${page.title}</h1>
           <p class="page-lede">${page.lede}</p>
         </div>
+        <div class="page-head__actions">
+          <span class="chip chip--queued">${page.issue}</span>
+          <span class="module-card__sprint">${page.sprint}</span>
+        </div>
       </div>
     </section>
 
-    <section class="placeholder" aria-labelledby="placeholder-title">
-      <div class="placeholder__flag">
-        <span class="chip chip--queued">${page.issue}</span>
-        <span class="mono placeholder__sprint">${page.sprint}</span>
+    <section class="module-card" aria-labelledby="module-title">
+      <div class="module-card__aside">
+        <div class="module-icon">${icon}</div>
+        <div class="module-card__flag">
+          <span class="chip chip--queued">Queued</span>
+        </div>
       </div>
-      <h2 id="placeholder-title">In the build queue</h2>
-      <p>${page.body}</p>
-      <div class="placeholder__next">
-        <p class="eyebrow">Unblocks after</p>
-        <p>${page.unblocks}</p>
-      </div>
-      <div class="placeholder__actions">
-        <a class="btn btn--ghost" href="/">Back to overview</a>
+      <div class="module-card__body">
+        <h2 id="module-title">In the build queue</h2>
+        <p>${page.body}</p>
+        <div class="module-card__next">
+          <p class="eyebrow">Unblocks after</p>
+          <p>${page.unblocks}</p>
+        </div>
+        <div class="module-card__actions">
+          <a class="btn btn--ghost" href="/">Back to overview</a>
+          <a class="btn btn--accent" href="/#modules">Module map</a>
+        </div>
       </div>
     </section>`;
 })();

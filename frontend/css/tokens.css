@@ -1,11 +1,13 @@
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
   /* Type */
+  --font-display: "Silkscreen", "Courier New", monospace;
   --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
 
-  --text-xs: 0.75rem;
+  --text-xs: 0.6875rem;
   --text-sm: 0.8125rem;
   --text-base: 0.9375rem;
   --text-md: 1.0625rem;
@@ -24,39 +26,60 @@
   --space-7: 3rem;
   --space-8: 4rem;
 
-  /* Warm graphite neutrals */
-  --bg: oklch(0.155 0.008 75);
-  --bg-elevated: oklch(0.185 0.009 75);
-  --surface: oklch(0.215 0.010 75);
-  --surface-2: oklch(0.255 0.011 75);
-  --line: oklch(0.315 0.010 75);
-  --line-strong: oklch(0.405 0.012 75);
+  /* Surfaces, sampled from the inspiration */
+  --paper: #f0efec;
+  --panel: #f5f5f5;
+  --panel-strong: #edebe6;
+  --cream: #f6f3d4;
+  --cream-deep: #efe9bd;
+  --blue: #b8ddf8;
+  --blue-deep: #a2d0f2;
+  --blue-line: #8fbedf;
 
-  --ink: oklch(0.945 0.006 75);
-  --ink-soft: oklch(0.790 0.008 75);
-  --ink-muted: oklch(0.635 0.010 75);
-  --ink-faint: oklch(0.500 0.010 75);
+  /* Ink */
+  --ink: #0e0e0e;
+  --ink-body: #1a1a1a;
+  --ink-soft: #2e2c29;
+  --ink-muted: #6b6862;
+  --ink-faint: #9a968f;
 
-  /* Signals */
-  --signal: oklch(0.82 0.155 82);
-  --signal-bright: oklch(0.88 0.160 85);
-  --signal-ink: oklch(0.210 0.030 82);
-  --success: oklch(0.76 0.125 152);
-  --danger: oklch(0.68 0.185 28);
-  --warning: oklch(0.79 0.140 70);
-  --info: oklch(0.73 0.090 238);
+  /* Tags and accents */
+  --pill: #26221f;
+  --pill-hover: #0e0c0a;
+  --pill-ink: #d9d4ce;
+  --yellow: #f5c736;
+  --yellow-deep: #d9a91b;
 
-  --grid-line: oklch(0.55 0.010 75 / 0.07);
+  /* Lines */
+  --line: #d8d5cf;
+  --line-strong: #b9b5ad;
+
+  /* State */
+  --success-bg: #dcefdc;
+  --success-ink: #1d5b34;
+  --success-line: #a9d2af;
+  --danger-bg: #f3d9d6;
+  --danger-ink: #8c241b;
+  --danger-line: #d9a9a3;
+  --warn-bg: #f6f3d4;
+  --warn-ink: #6f4e00;
+  --warn-line: #dad2a2;
+  --info-bg: #dceaf5;
+  --info-ink: #1f5f8b;
+  --info-line: #a9cbe2;
+
+  /* Status LEDs */
+  --traffic-red: #e86a5e;
+  --traffic-yellow: #f2c14e;
+  --traffic-green: #7fbf7f;
 
   /* Shape */
-  --radius-xs: 4px;
-  --radius-sm: 7px;
-  --radius-md: 11px;
-  --radius-lg: 16px;
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
   --radius-pill: 999px;
 
-  --shadow-1: inset 0 1px 0 oklch(1 0 0 / 0.035), 0 16px 40px -24px oklch(0.03 0.01 75 / 0.9);
-  --shadow-2: 0 24px 60px -30px oklch(0.03 0.01 75 / 0.95);
+  --shadow-panel: inset 0 1px 0 rgba(255, 255, 255, 0.65), 0 10px 24px -22px rgba(0, 0, 0, 0.45);
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
@@ -65,6 +88,5 @@
   --dur-3: 260ms;
 
   /* Frame */
-  --topbar-h: 4.25rem;
-  --page-max: 90rem;
+  --page-max: 76rem;
 }
