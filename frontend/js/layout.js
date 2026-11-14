@@ -1,58 +1,88 @@
-/* Shared application shell: brand, primary navigation, UTC clock, footer. */
+/* Shared shell: auth state, navigation, alert badge, UTC clock, footer. */
 
 (() => {
   const NAV_ITEMS = [
+    { href: "/", label: "Overview", page: "overview" },
     { href: "/robots.html", label: "Fleet", page: "robots" },
     { href: "/map.html", label: "Live map", page: "map" },
     { href: "/missions.html", label: "Missions", page: "missions" },
-    { href: "/alerts.html", label: "Alerts", page: "alerts" },
+    { href: "/alerts.html", label: "Alerts", page: "alerts", alertBadge: true },
     { href: "/analytics.html", label: "Analytics", page: "analytics" },
     { href: "/predictions.html", label: "Risk", page: "predictions" },
   ];
 
-  const BRAND_MARK = `
-    <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-      <rect x="1" y="1" width="30" height="30" rx="7" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.45" />
-      <path d="M8.5 23.5a11 11 0 0 1 11-11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
-      <path d="M12.5 23.5a7 7 0 0 1 7-7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity="0.6" />
-      <circle cx="23.5" cy="23.5" r="2.1" fill="currentColor" />
-    </svg>`;
+  const Fleet = window.Fleet;
+  if (!Fleet) return;
+
+  const currentPage = document.body.dataset.page;
+  const requiresAuth = document.body.dataset.auth === "required";
+  const minimal = document.body.dataset.shell === "minimal";
+  const session = Fleet.user();
+
+  if (requiresAuth && !Fleet.token()) {
+    window.location.replace(
+      `/login.html?next=${encodeURIComponent(window.location.pathname)}`,
+    );
+    return;
+  }
 
   function isActive(page) {
-    return document.body.dataset.page === page;
+    return currentPage === page;
+  }
+
+  function brandHTML() {
+    return `<a class="brand" href="/"><span class="brand__mark" aria-hidden="true"></span>Fleet Control</a>`;
+  }
+
+  function clockHTML() {
+    return `<span class="header__clock">
+      <span>UTC</span>
+      <span data-clock>--:--:--</span>
+    </span>`;
+  }
+
+  function navItems() {
+    const items = [...NAV_ITEMS];
+    if (session && session.role === "admin") {
+      items.push({ href: "/robot-new.html", label: "Register", page: "robot-new" });
+    }
+    return items;
   }
 
   function headerHTML() {
-    const links = NAV_ITEMS.map((item) => {
-      const current = isActive(item.page) ? ' aria-current="page"' : "";
-      return `<a class="nav__link" href="${item.href}"${current}>${item.label}</a>`;
-    }).join("");
+    if (minimal) {
+      return `
+        <div class="header__inner">
+          ${brandHTML()}
+          <div class="header__meta">${clockHTML()}</div>
+        </div>`;
+    }
+
+    const links = navItems()
+      .map((item) => {
+        const current = isActive(item.page) ? ' aria-current="page"' : "";
+        const badge = item.alertBadge
+          ? ` <span class="nav__badge" data-alert-count hidden>0</span>`
+          : "";
+        return `<a class="nav__link" href="${item.href}"${current}>${item.label}${badge}</a>`;
+      })
+      .join("");
+
+    const account = session
+      ? `<span class="header__user">
+           <span class="header__user-name">${Fleet.escapeHtml(session.full_name)}</span>
+           <span class="header__user-role">${Fleet.escapeHtml(session.role)}</span>
+         </span>
+         <button class="btn btn--ghost btn--sm" type="button" data-logout>Log out</button>`
+      : `<a class="btn btn--dark btn--sm" href="/login.html">Log in</a>`;
 
     return `
-      <div class="topbar">
-        <div class="topbar__inner">
-          <a class="brand" href="/" aria-label="Fleet Control home">
-            <span class="brand__mark">${BRAND_MARK}</span>
-            <span class="brand__text">
-              <span class="brand__name">Fleet Control</span>
-              <span class="brand__tag">Patrol operations</span>
-            </span>
-          </a>
-          <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation">
-            <span class="nav-toggle__bar"></span>
-            <span class="nav-toggle__bar"></span>
-            <span class="nav-toggle__bar"></span>
-          </button>
-          <nav class="nav" id="primary-nav" aria-label="Primary">
-            ${links}
-          </nav>
-          <div class="topbar__meta">
-            <span class="clock mono" title="Coordinated Universal Time">
-              <span class="clock__label">UTC</span>
-              <span data-clock>--:--:--</span>
-            </span>
-            <span class="preview-chip">Shell build</span>
-          </div>
+      <div class="header__inner">
+        ${brandHTML()}
+        <nav class="nav" aria-label="Primary">${links}</nav>
+        <div class="header__meta">
+          ${account}
+          ${clockHTML()}
         </div>
       </div>`;
   }
@@ -60,14 +90,54 @@
   function footerHTML() {
     return `
       <div class="footer__inner">
-        <p>Fleet Control <span class="footer__sep">/</span> Practice build <span class="footer__sep">/</span> FastAPI + SQLite</p>
-        <p class="mono">No telemetry connected</p>
+        <div class="footer__brand">
+          ${brandHTML()}
+          <p>
+            A supervision desk for security patrol robots. Built as a practice
+            project, one sprint at a time.
+          </p>
+        </div>
+        <nav class="footer__col" aria-label="Sections">
+          <h3>Sections</h3>
+          <ul>
+            <li><a href="/">Overview</a></li>
+            <li><a href="/robots.html">Fleet registry</a></li>
+            <li><a href="/map.html">Live map</a></li>
+            <li><a href="/missions.html">Patrol missions</a></li>
+          </ul>
+        </nav>
+        <nav class="footer__col" aria-label="More">
+          <h3>More</h3>
+          <ul>
+            <li><a href="/alerts.html">Alerts</a></li>
+            <li><a href="/analytics.html">Analytics</a></li>
+            <li><a href="/predictions.html">Risk forecast</a></li>
+            <li><a href="/#modules">Module map</a></li>
+          </ul>
+        </nav>
+        <div class="footer__col">
+          <h3>Build</h3>
+          <ul>
+            <li>FastAPI + SQLite</li>
+            <li>All four sprints shipped</li>
+            <li>UTC storage · local display</li>
+          </ul>
+          <p class="footer__status" data-health>
+            <span class="status-dot status-dot--off" aria-hidden="true"></span>
+            Checking API
+          </p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>Fleet Control · Practice build</p>
+        <p><span data-clock>--:--:--</span> UTC</p>
+        <a class="footer__top" href="#main">Back to top <span aria-hidden="true">↑</span></a>
       </div>`;
   }
 
   function startClock() {
-    const target = document.querySelector("[data-clock]");
-    if (!target) return;
+    const targets = [...document.querySelectorAll("[data-clock]")];
+    if (!targets.length) return;
 
     const formatter = new Intl.DateTimeFormat("en-GB", {
       timeZone: "UTC",
@@ -78,47 +148,67 @@
     });
 
     const tick = () => {
-      target.textContent = formatter.format(new Date());
+      const time = formatter.format(new Date());
+      targets.forEach((target) => {
+        target.textContent = time;
+      });
     };
 
     tick();
     window.setInterval(tick, 1000);
   }
 
-  function initNav() {
-    const toggle = document.querySelector(".nav-toggle");
-    const nav = document.getElementById("primary-nav");
-    if (!toggle || !nav) return;
+  async function checkHealth() {
+    const targets = [...document.querySelectorAll("[data-health]")];
+    if (!targets.length) return;
 
-    const close = () => {
-      nav.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-      toggle.setAttribute("aria-label", "Open navigation");
-    };
+    let healthy = false;
+    try {
+      const body = await Fleet.api("/api/v1/health");
+      healthy = body.status === "ok" && body.database === "up";
+    } catch {
+      healthy = false;
+    }
 
-    toggle.addEventListener("click", () => {
-      const open = nav.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(open));
-      toggle.setAttribute("aria-label", open ? "Close navigation" : "Open navigation");
+    targets.forEach((target) => {
+      target.innerHTML = `<span class="status-dot ${healthy ? "status-dot--live" : "status-dot--off"}" aria-hidden="true"></span>${
+        healthy ? "API up · database reachable" : "API unreachable"
+      }`;
     });
+  }
 
-    nav.addEventListener("click", (event) => {
-      if (event.target.closest("a") && window.matchMedia("(max-width: 980px)").matches) {
-        close();
-      }
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") close();
-    });
+  async function refreshAlertCount() {
+    const badges = [...document.querySelectorAll("[data-alert-count]")];
+    if (!badges.length || !Fleet.token()) return;
+    try {
+      const { count } = await Fleet.api("/api/v1/alerts/open-count");
+      badges.forEach((badge) => {
+        badge.hidden = count === 0;
+        badge.textContent = count > 99 ? "99+" : String(count);
+      });
+    } catch {
+      /* The badge is decoration; keep the shell usable when polling fails. */
+    }
   }
 
   const header = document.getElementById("site-header");
   if (header) header.innerHTML = headerHTML();
 
   const footer = document.getElementById("site-footer");
-  if (footer) footer.innerHTML = footerHTML();
+  if (footer) {
+    footer.hidden = minimal;
+    footer.innerHTML = minimal ? "" : footerHTML();
+  }
 
-  initNav();
+  document.querySelectorAll("[data-logout]").forEach((button) => {
+    button.addEventListener("click", () => Fleet.logout());
+  });
+
   startClock();
+  if (!minimal) checkHealth();
+
+  if (session && !minimal) {
+    refreshAlertCount();
+    window.setInterval(refreshAlertCount, 10000);
+  }
 })();

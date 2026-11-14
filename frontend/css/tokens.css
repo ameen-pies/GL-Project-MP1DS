@@ -1,18 +1,20 @@
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
   /* Type */
-  --font-sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-mono: "DM Mono", ui-monospace, "Cascadia Code", Consolas, monospace;
 
-  --text-xs: 0.75rem;
+  --text-xs: 0.6875rem;
   --text-sm: 0.8125rem;
   --text-base: 0.9375rem;
   --text-md: 1.0625rem;
   --text-lg: 1.25rem;
   --text-xl: 1.5rem;
-  --text-2xl: 1.875rem;
-  --text-3xl: 2.375rem;
+  --text-2xl: 2rem;
+  --text-3xl: 2.75rem;
 
   /* Space */
   --space-1: 0.25rem;
@@ -23,48 +25,57 @@
   --space-6: 2rem;
   --space-7: 3rem;
   --space-8: 4rem;
+  --space-9: 6rem;
 
-  /* Warm graphite neutrals */
-  --bg: oklch(0.155 0.008 75);
-  --bg-elevated: oklch(0.185 0.009 75);
-  --surface: oklch(0.215 0.010 75);
-  --surface-2: oklch(0.255 0.011 75);
-  --line: oklch(0.315 0.010 75);
-  --line-strong: oklch(0.405 0.012 75);
+  /* Surfaces, sampled from the inspiration */
+  --bg: #ffffff;
+  --bg-soft: #fafbff;
+  --surface: #ffffff;
+  --periwinkle: #e5eafa;
+  --periwinkle-deep: #d5def9;
+  --periwinkle-soft: #f1f4fe;
+  --accent: #5b74e0;
+  --accent-soft: #8fa3f2;
+  --accent-deep: #3d4eb8;
 
-  --ink: oklch(0.945 0.006 75);
-  --ink-soft: oklch(0.790 0.008 75);
-  --ink-muted: oklch(0.635 0.010 75);
-  --ink-faint: oklch(0.500 0.010 75);
+  /* Ink */
+  --ink: #17171c;
+  --ink-soft: #3a3b45;
+  --ink-muted: #6e7180;
+  --ink-faint: #a2a5b2;
 
-  /* Signals */
-  --signal: oklch(0.82 0.155 82);
-  --signal-bright: oklch(0.88 0.160 85);
-  --signal-ink: oklch(0.210 0.030 82);
-  --success: oklch(0.76 0.125 152);
-  --danger: oklch(0.68 0.185 28);
-  --warning: oklch(0.79 0.140 70);
-  --info: oklch(0.73 0.090 238);
+  /* Lines */
+  --line: #e4e6ef;
+  --line-strong: #cdd2e2;
 
-  --grid-line: oklch(0.55 0.010 75 / 0.07);
+  /* Functional state */
+  --live: #2e7d55;
+  --live-bg: #e7f4ec;
+  --live-line: #b9ddc7;
+  --warn: #8a5a00;
+  --warn-bg: #fbf2d9;
+  --warn-line: #e6d3a4;
+  --danger: #a02f2f;
+  --danger-bg: #f9e7e7;
+  --danger-line: #e7bcbc;
 
   /* Shape */
-  --radius-xs: 4px;
-  --radius-sm: 7px;
-  --radius-md: 11px;
-  --radius-lg: 16px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
   --radius-pill: 999px;
 
-  --shadow-1: inset 0 1px 0 oklch(1 0 0 / 0.035), 0 16px 40px -24px oklch(0.03 0.01 75 / 0.9);
-  --shadow-2: 0 24px 60px -30px oklch(0.03 0.01 75 / 0.95);
+  --shadow-card: 0 18px 40px -26px rgba(28, 40, 90, 0.35), 0 2px 8px -4px rgba(28, 40, 90, 0.12);
+  --shadow-lift: 0 28px 60px -28px rgba(28, 40, 90, 0.4);
 
   /* Motion */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --dur-1: 120ms;
-  --dur-2: 180ms;
-  --dur-3: 260ms;
+  --dur-1: 140ms;
+  --dur-2: 220ms;
+  --dur-3: 320ms;
 
   /* Frame */
-  --topbar-h: 4.25rem;
-  --page-max: 90rem;
+  --page-max: 82rem;
+  --header-max: 86rem;
 }

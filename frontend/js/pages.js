@@ -1,93 +1,83 @@
-/* Honest empty states for modules that land in later sprints. */
+/* Overview: the six module cards, now pointing at the shipped routes. */
 
 (() => {
-  const PAGES = {
+  const MODULES = {
     robots: {
+      num: "01",
       title: "Fleet registry",
-      eyebrow: "Module",
-      issue: "SCRUM-22 / 23",
+      href: "/robots.html",
+      cover: "periwinkle",
+      issue: "SCRUM-20 / 22 / 23",
       sprint: "Sprint 1",
-      lede: "Register robots with a name and serial number, then search and scan the fleet at a glance.",
-      body: "The registry will list name, serial number, status, and battery for every robot in your company. Admins get a registration form and a one-time API key screen. Operators get the read-only list.",
-      unblocks: "Role-based login (SCRUM-20), so the registry can tell admins from operators.",
+      lede: "Role-based login, robot registration, search, status, and battery.",
     },
     map: {
+      num: "02",
       title: "Live map",
-      eyebrow: "Module",
-      issue: "SCRUM-26",
+      href: "/map.html",
+      cover: "ink",
+      issue: "SCRUM-24 to 27",
       sprint: "Sprint 2",
-      lede: "One marker per robot on OpenStreetMap, refreshed every five seconds.",
-      body: "The live map will poll the latest telemetry for your company, draw a marker per robot, and open a popup with name and status. A side panel will mirror status and battery for the whole fleet.",
-      unblocks: "Telemetry ingestion (SCRUM-24 and SCRUM-25), so there is a position to draw.",
+      lede: "Telemetry ingestion, OpenStreetMap markers, status panel, 5-second polling.",
     },
     missions: {
+      num: "03",
       title: "Patrol missions",
-      eyebrow: "Module",
+      href: "/missions.html",
+      cover: "outline",
       issue: "SCRUM-28 / 29",
       sprint: "Sprint 3",
-      lede: "Create a patrol from a seeded route, start it, and stop it.",
-      body: "Missions will move through scheduled, running, stopped, and completed. Each transition is written to an event log with the operator and the time, and a robot can only run one mission at a time.",
-      unblocks: "The mission data model (SCRUM-28) and the robot mission endpoint in SCRUM-29.",
+      lede: "Create from a seeded route, start and stop remotely, read the event log.",
     },
     alerts: {
+      num: "04",
       title: "Alerts",
-      eyebrow: "Module",
+      href: "/alerts.html",
+      cover: "deep",
       issue: "SCRUM-30 / 31",
       sprint: "Sprint 3",
-      lede: "Intrusion and obstacle events, queued for acknowledgement.",
-      body: "Robot events will create alerts scoped to the company, email opted-in users in the background, and show an open count in the navigation. Acknowledging an alert records who handled it and when.",
-      unblocks: "Telemetry auth (SCRUM-25) and the email service (SCRUM-30).",
+      lede: "Intrusion and obstacle alerts, email notifications, acknowledgement.",
     },
     analytics: {
+      num: "05",
       title: "Analytics",
-      eyebrow: "Module",
+      href: "/analytics.html",
+      cover: "ink",
       issue: "SCRUM-32 / 33",
       sprint: "Sprint 3 to 4",
-      lede: "Weekly patrol coverage, battery history, and uptime.",
-      body: "The analytics page will chart missions per day for the last seven days, with completed patrols in green and stopped patrols in red. The queries behind it are tested and indexed for a two-second budget.",
-      unblocks: "The statistics queries (SCRUM-32) and the weekly endpoint in SCRUM-33.",
+      lede: "Weekly patrol coverage, completed versus stopped, week by week.",
     },
     predictions: {
+      num: "06",
       title: "Risk forecast",
-      eyebrow: "Module",
+      href: "/predictions.html",
+      cover: "outline",
       issue: "SCRUM-35 to 37",
       sprint: "Sprint 4",
-      lede: "High-risk hours, learned from incidents.",
-      body: "An incident model will train on real alerts plus reproducible synthetic data, then surface the time slots where patrols are most likely to meet an intrusion or obstacle.",
-      unblocks: "Alert history (SCRUM-31) and the incident dataset in SCRUM-35.",
+      lede: "Hourly incident risk for the next 24 hours, from a trained model.",
     },
   };
 
-  const page = PAGES[document.body.dataset.page];
-  const main = document.getElementById("main");
-  if (!page || !main) return;
+  window.FleetModules = MODULES;
 
-  document.title = `${page.title} · Fleet Control`;
+  function cardHTML(module) {
+    return `
+      <a class="fan__card" href="${module.href}">
+        <span class="module-card">
+          <span class="module-cover module-cover--${module.cover}">
+            <span class="module-cover__num">${module.num}</span>
+            <span class="module-cover__tag">${module.sprint}</span>
+          </span>
+          <span class="module-body">
+            <span class="module-body__title">${module.title}</span>
+            <span class="module-body__meta">${module.issue}</span>
+          </span>
+        </span>
+      </a>`;
+  }
 
-  main.innerHTML = `
-    <section class="page-head">
-      <p class="eyebrow">${page.eyebrow} <span class="eyebrow__sep">/</span> Queued</p>
-      <div class="page-head__row">
-        <div>
-          <h1 class="page-title">${page.title}</h1>
-          <p class="page-lede">${page.lede}</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="placeholder" aria-labelledby="placeholder-title">
-      <div class="placeholder__flag">
-        <span class="chip chip--queued">${page.issue}</span>
-        <span class="mono placeholder__sprint">${page.sprint}</span>
-      </div>
-      <h2 id="placeholder-title">In the build queue</h2>
-      <p>${page.body}</p>
-      <div class="placeholder__next">
-        <p class="eyebrow">Unblocks after</p>
-        <p>${page.unblocks}</p>
-      </div>
-      <div class="placeholder__actions">
-        <a class="btn btn--ghost" href="/">Back to overview</a>
-      </div>
-    </section>`;
+  const fan = document.getElementById("module-fan");
+  if (fan) {
+    fan.innerHTML = Object.values(MODULES).map(cardHTML).join("");
+  }
 })();
